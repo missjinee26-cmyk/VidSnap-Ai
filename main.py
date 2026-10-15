@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import uuid
+import json
+from datetime import datetime, timezone
 from werkzeug.utils import secure_filename
 import os
 
@@ -47,6 +49,16 @@ def create():
 
             with open(os.path.join(upload_dir, "voice.txt"), "w", encoding="utf-8") as f:
                 f.write(voice)
+
+            meta = {
+                "id": rec_id,
+                "text": desc,
+                "voice": voice,
+                "files": input_files,
+                "created_at": datetime.now(timezone.utc).isoformat(),
+            }
+            with open(os.path.join(upload_dir, "meta.json"), "w", encoding="utf-8") as f:
+                json.dump(meta, f, ensure_ascii=False, indent=2)
 
             # ffmpeg concat quirk: the duration of the LAST file is ignored
             # unless that file is listed again, so repeat the final entry.

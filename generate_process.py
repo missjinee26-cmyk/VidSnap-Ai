@@ -20,14 +20,46 @@ except (ImportError, TypeError):
     GEMINI_AVAILABLE = False
 
 
+def load_meta(folder):
+    """Upload metadata from meta.json (new) — {} if missing/unreadable."""
+    meta_path = f"user_uploads/{folder}/meta.json"
+    if os.path.exists(meta_path):
+        try:
+            with open(meta_path, encoding="utf-8") as f:
+                data = json.load(f)
+            return data if isinstance(data, dict) else {}
+        except Exception as e:
+            print(f"meta.json unreadable for {folder}: {e}")
+    return {}
+
+
+def read_upload_text(folder):
+    """Voiceover text: meta.json first, desc.txt fallback (old uploads)."""
+    meta = load_meta(folder)
+    if meta.get("text") and str(meta["text"]).strip():
+        return str(meta["text"]).strip()
+    desc_path = f"user_uploads/{folder}/desc.txt"
+    if os.path.exists(desc_path):
+        with open(desc_path, encoding="utf-8") as f:
+            return f.read().strip()
+    return ""
+
+
+def read_upload_voice(folder):
+    """Voice pick: meta.json first, voice.txt fallback, adam default."""
+    meta = load_meta(folder)
+    if meta.get("voice") and str(meta["voice"]).strip():
+        return str(meta["voice"]).strip()
+    voice_path = f"user_uploads/{folder}/voice.txt"
+    if os.path.exists(voice_path):
+        with open(voice_path, encoding="utf-8") as f:
+            return f.read().strip() or "adam"
+    return "adam"
+
+
 def generate_ai_script(folder, images_info=None):
     """Generate an engaging script for the reel using AI."""
-    desc_path = f"user_uploads/{folder}/desc.txt"
-    if not os.path.exists(desc_path):
-        return None
-
-    with open(desc_path) as f:
-        user_text = f.read().strip()
+    user_text = read_upload_text(folder)
 
     if not user_text:
         return None
@@ -84,18 +116,12 @@ Format as JSON:
 
 def text_to_audio(folder):
     print("TTA -", folder)
-    desc_path = f"user_uploads/{folder}/desc.txt"
-    if not os.path.exists(desc_path):
-        print(f"Description file not found for {folder}")
+    text = read_upload_text(folder)
+    if not text:
+        print(f"No voiceover text found for {folder}")
         return
 
-    with open(desc_path, encoding="utf-8") as f:
-        text = f.read()
-    voice_path = f"user_uploads/{folder}/voice.txt"
-    voice = "adam"
-    if os.path.exists(voice_path):
-        with open(voice_path, encoding="utf-8") as f:
-            voice = f.read().strip() or "adam"
+    voice = read_upload_voice(folder)
     print(text, folder, f"[voice={voice}]")
     text_to_speech_file(text, folder, voice)
 
