@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Create Reel - VidSnapAI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/create.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="px-container">
+    <div class="px-card">
+        <div class="px-card-pad">
+            <p class="px-kicker">NEW REEL // STEP 1-2-3</p>
+            <h1 class="px-title" style="font-size: clamp(24px, 4vw, 40px);">Create Your Reel</h1>
+            <p class="px-sub">Upload clips or photos, type the voiceover, pick a voice. The agent renders while you watch the gallery.</p>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <form action="/create" enctype="multipart/form-data" method="post" class="upload-form" id="uploadForm">
+                <div class="fallback">
+                    <p class="px-form-label">01 // Drop your files</p>
+                    <div id="fileInputs">
+                        <div class="file-input-group">
+                            <input name="file1" type="file" class="file-input" accept="image/*,video/*" />
+                            <input name="uuid" type="hidden" value="{{ myid }}">
+                            <button type="button" class="remove-file-btn" onclick="removeFileInput(this)" disabled title="Remove">X</button>
+                        </div>
+                    </div>
+                    <button type="button" class="add-file-btn" onclick="addFileInput()">+ Add File</button>
+                </div>
+
+                <div class="text-input-container">
+                    <p class="px-form-label">02 // Voiceover script</p>
+                    <textarea class="text-input" id="textInput" name="text" placeholder="Enter your text to be added as voice here..." rows="4" required></textarea>
+                </div>
+
+                <div class="voice-select-container">
+                    <label for="voiceSelect" class="voice-label">03 // Voiceover voice</label>
+                    <select class="voice-select" id="voiceSelect" name="voice">
+                        <option value="adam" selected>Adam — Deep, Dominant (male)</option>
+                        <option value="sarah">Sarah — Mature, Confident (female)</option>
+                        <option value="liam">Liam — Energetic Creator (male)</option>
+                        <option value="bella">Bella — Bright, Warm (female)</option>
+                        <option value="charlie">Charlie — Deep, Energetic (male)</option>
+                        <option value="jessica">Jessica — Playful, Bright (female)</option>
+                        <option value="alice">Alice — Clear Educator (female)</option>
+                        <option value="brian">Brian — Deep, Comforting (male)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Render Reel &gt;
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let fileCounter = 2;
+
+    function addFileInput() {
+        const fileInputs = document.getElementById('fileInputs');
+        const newFileInput = document.createElement('div');
+        newFileInput.className = 'file-input-group';
+        newFileInput.innerHTML = `
+            <input name="file${fileCounter}" type="file" class="file-input" accept="image/*,video/*" />
+            <button type="button" class="remove-file-btn" onclick="removeFileInput(this)" title="Remove">X</button>
+        `;
+        fileInputs.appendChild(newFileInput);
+        fileCounter++;
+    }
+
+    function removeFileInput(button) {
+        const fileInputGroup = button.parentElement;
+        fileInputGroup.remove();
+    }
+</script>
+{% endblock %}

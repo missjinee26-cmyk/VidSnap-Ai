@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Gallery - VidSnapAI{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="px-container">
+    <div class="px-card">
+        <div class="px-card-pad">
+            <p class="px-kicker">ARCHIVE // RENDERED REELS</p>
+            <h1 class="px-title" style="font-size: clamp(24px, 4vw, 40px);">Reel Gallery</h1>
+            <p class="px-sub">Every finished render lands here. Fresh uploads take a minute while the agent works.</p>
+            <div class="gallery-grid">
+                {% for reel in reels %}
+                <div class="reel-item">
+                    <video src="{{ url_for('static', filename='reels/' + reel) }}" controls preload="metadata"></video>
+                    <p class="reel-name">{{ reel }}</p>
+                </div>
+                {% else %}
+                <p class="no-reels">No reels yet. <a href="/create">Create your first reel!</a></p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

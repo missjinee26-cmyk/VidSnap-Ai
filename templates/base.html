@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}VidSnapAI{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="px-dots" aria-hidden="true"></div>
+    <header class="px-topbar">
+        <a class="px-brand" href="/">
+            <span class="px-brand-box" aria-hidden="true"></span>
+            <span class="px-brand-name">VidSnapAI</span>
+        </a>
+        <nav class="px-nav" aria-label="Main navigation">
+            <a class="px-nav-link" href="/">Home</a>
+            <a class="px-nav-link" href="/create">Create Reel</a>
+            <a class="px-nav-link" href="/gallery">Gallery</a>
+        </nav>
+        <a class="px-btn px-btn-small" href="/create">Try It Free</a>
+    </header>
+
+    <main class="px-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="px-footer">
+        <div class="px-container px-footer-row">
+            <span>© 2024 VidSnapAI. All rights reserved.</span>
+            <span class="px-footer-stats">reels rendered &bull; 8 voices &bull; 0 lost tabs</span>
+        </div>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

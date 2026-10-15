@@ -1,0 +1,22 @@
+# Secrets - never commit real API keys
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Runtime state (regenerated on each run)
+user_uploads/
+static/reels/
+done.txt
+
+# Local ffmpeg bundle (~176MB, exceeds sane repo size).
+# Install ffmpeg and ensure it is on PATH, or drop a build in ffmpeg/bin/
+# (ffmpeg.exe + ffprobe.exe). See README.
+ffmpeg/
+
+# Leftover scratch files
+template.zip
+sample_input_ffmpeg.txt
+*.log

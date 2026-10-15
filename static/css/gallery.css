@@ -1,0 +1,44 @@
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.reel-item {
+    background: #fff;
+    border: 3px solid var(--px-ink);
+    box-shadow: 5px 5px 0 var(--px-ink);
+}
+
+.reel-item video {
+    width: 100%;
+    max-height: 520px;
+    display: block;
+    background: #000;
+    border-bottom: 3px solid var(--px-ink);
+}
+
+.reel-name {
+    padding: 10px 12px;
+    margin: 0;
+    font-size: 12px;
+    color: #3d3a34;
+    word-break: break-all;
+}
+
+.no-reels {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #3d3a34;
+    background: #fff;
+    border: 3px dashed var(--px-ink);
+    padding: 40px 20px;
+    margin: 0;
+}
+
+.no-reels a {
+    font-family: var(--px-font-pixel);
+    font-size: 12px;
+    color: var(--px-ink);
+}

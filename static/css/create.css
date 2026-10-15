@@ -1,0 +1,180 @@
+.upload-form {
+    border: 3px solid var(--px-ink);
+    background: #efe9dc;
+    background-image: radial-gradient(rgba(22, 22, 22, 0.08) 1px, transparent 1.5px);
+    background-size: 10px 10px;
+    padding: 24px;
+    margin-top: 10px;
+}
+
+.px-form-label {
+    font-family: var(--px-font-pixel);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--px-ink);
+    margin: 0 0 12px;
+}
+
+.text-input-container {
+    margin: 22px 0;
+}
+
+.text-input {
+    width: 100%;
+    padding: 14px;
+    border: 3px solid var(--px-ink);
+    background: #fff;
+    font-size: 14px;
+    font-family: var(--px-font-mono);
+    color: var(--px-ink);
+    resize: vertical;
+    min-height: 110px;
+    box-shadow: 4px 4px 0 var(--px-ink);
+}
+
+.text-input:focus {
+    outline: none;
+    box-shadow: 4px 4px 0 var(--px-ink), 0 0 0 3px #fff inset;
+}
+
+.text-input::placeholder {
+    color: #8f8b81;
+}
+
+.file-input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.file-input {
+    flex: 1;
+    padding: 10px;
+    border: 3px solid var(--px-ink);
+    background: #fff;
+    font-family: var(--px-font-mono);
+    font-size: 13px;
+    color: var(--px-ink);
+}
+
+.file-input::file-selector-button {
+    font-family: var(--px-font-pixel);
+    font-size: 11px;
+    background: var(--px-ink);
+    color: var(--px-paper);
+    border: none;
+    padding: 8px 12px;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+.add-file-btn {
+    font-family: var(--px-font-pixel);
+    font-size: 11px;
+    background: #fff;
+    color: var(--px-ink);
+    border: 3px solid var(--px-ink);
+    padding: 10px 16px;
+    cursor: pointer;
+    margin: 6px 0 0;
+    box-shadow: 4px 4px 0 var(--px-ink);
+}
+
+.add-file-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 var(--px-ink);
+}
+
+.add-file-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 var(--px-ink);
+}
+
+.remove-file-btn {
+    font-family: var(--px-font-pixel);
+    font-size: 12px;
+    background: var(--px-ink);
+    color: #fff;
+    border: 3px solid var(--px-ink);
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.remove-file-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.remove-file-btn:not(:disabled):hover {
+    background: #5c1a14;
+}
+
+#fileInputs {
+    margin-bottom: 12px;
+}
+
+.voice-select-container {
+    margin: 0 0 22px;
+}
+
+.voice-label {
+    display: block;
+    font-family: var(--px-font-pixel);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    color: var(--px-ink);
+}
+
+.voice-select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 3px solid var(--px-ink);
+    background: #fff;
+    font-size: 14px;
+    font-family: var(--px-font-mono);
+    color: var(--px-ink);
+    box-shadow: 4px 4px 0 var(--px-ink);
+}
+
+.voice-select:focus {
+    outline: none;
+}
+
+.submit-btn {
+    width: 100%;
+    font-family: var(--px-font-pixel);
+    font-size: 14px;
+    background: var(--px-ink);
+    color: var(--px-paper);
+    padding: 16px 20px;
+    border: 3px solid var(--px-ink);
+    cursor: pointer;
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.4);
+}
+
+.submit-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+}
+
+.submit-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 560px) {
+    .upload-form {
+        padding: 16px;
+    }
+    .file-input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .remove-file-btn {
+        align-self: flex-end;
+    }
+}

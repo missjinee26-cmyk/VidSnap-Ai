@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}VidSnapAI - Turn Clips Into Reels{% endblock %}
+
+{% block content %}
+<div class="px-container">
+    <div class="px-card">
+        <div class="px-card-pad">
+            <div class="px-hero">
+                <div>
+                    <p class="px-kicker">AI REEL AGENT // V1.0</p>
+                    <h1 class="px-title">Vidsnap<br>AI Agent</h1>
+                    <p class="px-sub">Vidsnap naps on your camera roll and wakes up to stitch clips, narrate fast, and guard your aspect ratio.</p>
+                    <div class="px-cta-row">
+                        <a href="/create" class="px-btn px-btn-light">Create a Reel</a>
+                        <a href="/gallery" class="px-link-arrow">View Gallery &gt;</a>
+                    </div>
+                    <p class="px-mini-stats">reels rendered &nbsp;&bull;&nbsp; 8 voices &nbsp;&bull;&nbsp; 0 lost tabs</p>
+                </div>
+                <div class="px-hero-visual">
+                    <div class="px-top-mini-nav" aria-hidden="true">
+                        <span>Clips</span><span>Voice</span><span>Render</span><span>Post</span>
+                    </div>
+                    <div class="px-bubble">Snap! 3 clips stitched, 1 reel rendered.</div>
+                    <svg class="px-cat" viewBox="0 0 120 124" shape-rendering="crispEdges" role="img" aria-label="VidSnap pixel kitten mascot">
+                        <!-- ground streaks -->
+                        <rect x="16" y="112" width="88" height="2" fill="#161616" opacity="0.45"/>
+                        <rect x="30" y="116" width="62" height="2" fill="#161616" opacity="0.3"/>
+                        <rect x="44" y="108" width="38" height="2" fill="#161616" opacity="0.22"/>
+                        <!-- tail -->
+                        <ellipse cx="94" cy="96" rx="13" ry="7" transform="rotate(-18 94 96)" fill="#f7f3ea" stroke="#161616" stroke-width="2.5"/>
+                        <ellipse cx="94" cy="96" rx="6" ry="3" transform="rotate(-18 94 96)" fill="#e7e0d1"/>
+                        <!-- body -->
+                        <ellipse cx="60" cy="94" rx="21" ry="15" fill="#f7f3ea" stroke="#161616" stroke-width="2.5"/>
+                        <ellipse cx="60" cy="98" rx="12" ry="8" fill="#e7e0d1"/>
+                        <!-- hind paws -->
+                        <ellipse cx="41" cy="104" rx="7" ry="4" fill="#f7f3ea" stroke="#161616" stroke-width="2"/>
+                        <ellipse cx="79" cy="104" rx="7" ry="4" fill="#f7f3ea" stroke="#161616" stroke-width="2"/>
+                        <!-- front paws -->
+                        <rect x="50" y="96" width="8" height="12" fill="#f7f3ea" stroke="#161616" stroke-width="2"/>
+                        <rect x="62" y="96" width="8" height="12" fill="#f7f3ea" stroke="#161616" stroke-width="2"/>
+                        <line x1="54" y1="101" x2="54" y2="108" stroke="#161616" stroke-width="1.5"/>
+                        <line x1="66" y1="101" x2="66" y2="108" stroke="#161616" stroke-width="1.5"/>
+                        <!-- ears -->
+                        <polygon points="30,42 36,12 54,30" fill="#f7f3ea" stroke="#161616" stroke-width="2.5" stroke-linejoin="round"/>
+                        <polygon points="90,42 84,12 66,30" fill="#f7f3ea" stroke="#161616" stroke-width="2.5" stroke-linejoin="round"/>
+                        <polygon points="36,34 39,21 48,29" fill="#c9c2b4"/>
+                        <polygon points="84,34 81,21 72,29" fill="#c9c2b4"/>
+                        <!-- fluffy cheeks (head covers inner strokes) -->
+                        <circle cx="29" cy="60" r="8" fill="#f7f3ea" stroke="#161616" stroke-width="2.5"/>
+                        <circle cx="91" cy="60" r="8" fill="#f7f3ea" stroke="#161616" stroke-width="2.5"/>
+                        <!-- head -->
+                        <ellipse cx="60" cy="58" rx="33" ry="29" fill="#f7f3ea" stroke="#161616" stroke-width="2.5"/>
+                        <polygon points="55,31 60,22 65,31" fill="#f7f3ea" stroke="#161616" stroke-width="2" stroke-linejoin="round"/>
+                        <!-- soft side shading -->
+                        <ellipse cx="78" cy="62" rx="9" ry="15" fill="#e7e0d1" opacity="0.85"/>
+                        <!-- giant glossy eyes -->
+                        <ellipse cx="47" cy="56" rx="7" ry="10.5" fill="#161616"/>
+                        <ellipse cx="73" cy="56" rx="7" ry="10.5" fill="#161616"/>
+                        <circle cx="49.5" cy="52" r="2.6" fill="#f4f1ea"/>
+                        <circle cx="75.5" cy="52" r="2.6" fill="#f4f1ea"/>
+                        <circle cx="45" cy="59.5" r="1.2" fill="#f4f1ea" opacity="0.8"/>
+                        <circle cx="71" cy="59.5" r="1.2" fill="#f4f1ea" opacity="0.8"/>
+                        <!-- nose + mouth -->
+                        <polygon points="57,68 63,68 60,71.5" fill="#161616"/>
+                        <path d="M60,71.5 L60,74 M60,74 Q57,77 54,75 M60,74 Q63,77 66,75" stroke="#161616" stroke-width="1.8" fill="none"/>
+                        <!-- whiskers -->
+                        <line x1="30" y1="64" x2="40" y2="66" stroke="#b9b2a4" stroke-width="1.5"/>
+                        <line x1="30" y1="70" x2="40" y2="69" stroke="#b9b2a4" stroke-width="1.5"/>
+                        <line x1="80" y1="66" x2="90" y2="64" stroke="#b9b2a4" stroke-width="1.5"/>
+                        <line x1="80" y1="69" x2="90" y2="70" stroke="#b9b2a4" stroke-width="1.5"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="px-section">
+        <h2 class="px-section-title">Skillset</h2>
+        <div class="px-grid-3">
+            <div class="px-panel">
+                <span class="px-panel-icon">01</span>
+                <h3>Smart Stitching</h3>
+                <p>Drop in clips and photos. The agent concats them into a vertical 1080x1920 reel.</p>
+            </div>
+            <div class="px-panel">
+                <span class="px-panel-icon">02</span>
+                <h3>8 Voiceovers</h3>
+                <p>Pick from 8 ElevenLabs voices. Type text, get studio narration on your reel.</p>
+            </div>
+            <div class="px-panel">
+                <span class="px-panel-icon">03</span>
+                <h3>AI Script Polish</h3>
+                <p>Optional OpenAI/Gemini pass turns rough notes into a hook-first reel script.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="px-section">
+        <h2 class="px-section-title">Daily Rhythm</h2>
+        <div class="px-shots">
+            <div class="px-shot"><img src="{{ url_for('static', filename='1.jpg') }}" alt="Reel example 1"></div>
+            <div class="px-shot"><img src="{{ url_for('static', filename='2.jpg') }}" alt="Reel example 2"></div>
+            <div class="px-shot"><img src="{{ url_for('static', filename='3.jpg') }}" alt="Reel example 3"></div>
+            <div class="px-shot"><img src="{{ url_for('static', filename='4.jpg') }}" alt="Reel example 4"></div>
+            <div class="px-shot"><img src="{{ url_for('static', filename='5.jpg') }}" alt="Reel example 5"></div>
+        </div>
+    </section>
+</div>
+{% endblock %}
