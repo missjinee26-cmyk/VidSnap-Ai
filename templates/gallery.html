@@ -13,6 +13,35 @@
             <p class="px-kicker">ARCHIVE // RENDERED REELS</p>
             <h1 class="px-title" style="font-size: clamp(24px, 4vw, 40px);">Reel Gallery</h1>
             <p class="px-sub">Every finished render lands here. Fresh uploads take a minute while the agent works.</p>
+
+            {% if pending %}
+            <div class="gallery-grid">
+                {% for p in pending %}
+                <div class="reel-item pending-item">
+                    <div class="pending-thumb" aria-hidden="true">
+                        <span class="pending-badge">RENDERING...</span>
+                    </div>
+                    <p class="reel-name">{{ p.id[:8] }}... &middot; Voice: {{ p.voice }}</p>
+                    <p class="pending-hint">Agent is working. This page refreshes itself.</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if failed %}
+            <div class="gallery-grid">
+                {% for f in failed %}
+                <div class="reel-item failed-item">
+                    <div class="failed-thumb" aria-hidden="true">
+                        <span class="failed-badge">FAILED</span>
+                    </div>
+                    <p class="reel-name">{{ f.id[:8] }}... &middot; Voice: {{ f.voice }}</p>
+                    <p class="pending-hint">{{ f.error }} Try uploading again.</p>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
             <div class="gallery-grid">
                 {% for reel in reels %}
                 <div class="reel-item">
@@ -20,10 +49,21 @@
                     <p class="reel-name">{{ reel }}</p>
                 </div>
                 {% else %}
+                {% if not pending and not failed %}
                 <p class="no-reels">No reels yet. <a href="/create">Create your first reel!</a></p>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+{% if pending %}
+<script>
+    // While something is rendering, refresh so the finished reel appears by itself.
+    setTimeout(function () { location.reload(); }, 8000);
+</script>
+{% endif %}
 {% endblock %}

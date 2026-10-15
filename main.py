@@ -67,13 +67,57 @@ def create():
     return render_template("create.html", myid=myid)
 
 
+def _folder_voice(fid):
+    """Voice pick for an upload folder (for status display)."""
+    voice_path = os.path.join(app.config['UPLOAD_FOLDER'], fid, "voice.txt")
+    try:
+        with open(voice_path, encoding="utf-8") as f:
+            return f.read().strip() or "adam"
+    except OSError:
+        return "adam"
+
+
 @app.route("/gallery")
 def gallery():
     reels = []
     reels_dir = "static/reels"
     if os.path.exists(reels_dir):
-        reels = [f for f in os.listdir(reels_dir) if f.endswith(('.mp4', '.mov', '.avi', '.mkv'))]
-    return render_template("gallery.html", reels=reels)
+        reels = sorted(
+            (f for f in os.listdir(reels_dir)
+             if f.endswith(('.mp4', '.mov', '.avi', '.mkv'))),
+            key=lambda f: os.path.getmtime(os.path.join(reels_dir, f)),
+            reverse=True,
+        )
+
+    done = set()
+    if os.path.exists("done.txt"):
+        with open("done.txt", encoding="utf-8") as f:
+            done = {line.strip() for line in f if line.strip()}
+
+    pending, failed = [], []
+    uploads_dir = app.config['UPLOAD_FOLDER']
+    if os.path.exists(uploads_dir):
+        folders = sorted(
+            (d for d in os.listdir(uploads_dir)
+             if os.path.isdir(os.path.join(uploads_dir, d))),
+            key=lambda d: os.path.getmtime(os.path.join(uploads_dir, d)),
+            reverse=True,
+        )
+        for fid in folders:
+            fdir = os.path.join(uploads_dir, fid)
+            err_path = os.path.join(fdir, "error.txt")
+            reel_path = os.path.join(reels_dir, fid + ".mp4")
+            if os.path.exists(err_path) and not os.path.exists(reel_path):
+                try:
+                    with open(err_path, encoding="utf-8") as f:
+                        err = f.read().strip().splitlines()[0][:120]
+                except OSError:
+                    err = "Render failed."
+                failed.append({"id": fid, "error": err, "voice": _folder_voice(fid)})
+            elif not os.path.exists(reel_path) and fid not in done:
+                pending.append({"id": fid, "voice": _folder_voice(fid)})
+
+    return render_template("gallery.html", reels=reels, pending=pending, failed=failed)
 
 
 if __name__ == "__main__":
